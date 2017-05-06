@@ -11,3 +11,8 @@ const check = fs.stat('./data/', (err, stats) => {
     }
     // If the directory already exists, just do nothing
 })
+
+
+// Choose and use two third-party npm packages.
+    // One package should be used to scrape content from the site.
+    // The other package should create the CSV file.
