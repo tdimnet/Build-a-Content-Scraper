@@ -22,16 +22,9 @@ const check = fs.stat('./data/', (err, stats) => {
     // The other package should create the CSV file.
 
 
-// Program your scraper so that it visits the website and uses the shirts.php as single entry point
-scrapeIt('http://www.shirts4mike.com/', {
-    // listItem: 'h1',
-    // url: {
-    //     selector: '.nav .shirts a',
-    //     attr: 'href'
-    // }
-
-    // This function gets me the t-shirts from the home page, I now need to access the shirts page
-    shirts: {
+function getProducts(url) {
+    scrapeIt('http://www.shirts4mike.com/'+url, {
+        shirts: {
         listItem: '.products li',
         name: 'shirts',
         data: {
@@ -41,11 +34,23 @@ scrapeIt('http://www.shirts4mike.com/', {
                 attr: 'href'
             }
         }
+    }
+}).then(function(value) {
+    console.log(value)
+})};
 
+
+// Program your scraper so that it visits the website and uses the shirts.php as single entry point
+const getUrl = scrapeIt('http://www.shirts4mike.com/', {
+    listItem: 'h1',
+    url: {
+        selector: '.nav .shirts a',
+        attr: 'href'
     }
 
 }).then(function(value) {
-    console.log(value);
+    let productsUrl = value.url;
+    getProducts(productsUrl);
 }, function(raison) {
     console.log(raison);
 });
