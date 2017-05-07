@@ -1,0 +1,19 @@
+{
+  "name": "build-a-content-scraper",
+  "version": "1.0.0",
+  "description": "Here is the sixth project of the fullstack javacript techdegree built with and for the treehouse academy",
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdimnet/Build-a-Content-Scraper.git"
+  },
+  "author": "Thomas Dimnet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdimnet/Build-a-Content-Scraper/issues"
+  },
+  "homepage": "https://github.com/tdimnet/Build-a-Content-Scraper#readme"
+}
