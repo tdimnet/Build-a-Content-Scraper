@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tdimnet/Build-a-Content-Scraper/issues"
   },
-  "homepage": "https://github.com/tdimnet/Build-a-Content-Scraper#readme"
+  "homepage": "https://github.com/tdimnet/Build-a-Content-Scraper#readme",
+  "dependencies": {
+    "scrape-it": "^3.3.2"
+  }
 }
