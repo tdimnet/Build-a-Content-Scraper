@@ -1,8 +1,9 @@
 // Create a folder called data if it does not already exist inside the folder
 const fs = require('fs');
-
 // The web scraper
 const scrapeIt = require('scrape-it');
+// The JSON to CSV
+var json2csv = require('json2csv');
 
 
 // Check if the folder exists or not. If not, create a new one
@@ -63,10 +64,19 @@ function getAllShirtsInfo(shirtsUrl) {
     }).then(function(value) {
         // The log below gives the url, the shirt title (with price and color) and the shirt picture
         // console.log(shirtsUrl + '\n' + value.title + '\n' + value.picture);
-        console.log(value)
+        arrayOfShirts(shirtsUrl, value.title, value.picture);
     })
 }
 
+function arrayOfShirts(url, title, picture) {
+    // console.log(url, title, picture)
+    let foo = {
+        url: url,
+        title: title,
+        picture: picture
+    }
+    console.log(foo)
+}
 
 // Program your scraper so that it visits the website and uses the shirts.php as single entry point
 const getUrl = scrapeIt('http://www.shirts4mike.com/', {

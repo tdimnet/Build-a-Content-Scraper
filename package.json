@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/tdimnet/Build-a-Content-Scraper#readme",
   "dependencies": {
+    "json2csv": "^3.7.3",
     "scrape-it": "^3.3.2"
   }
 }
