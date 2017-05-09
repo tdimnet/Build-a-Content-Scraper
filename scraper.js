@@ -39,11 +39,13 @@ function getProductsUrl(url) {
     }
 }).then(function(value) {
     // let arrayOfShirtsUrl = value.shirts;
+    let table = [];
     // For now, we are working with just one value => this is an object, so thing to access the property
     for (let i = 0; i < value.shirts.length; i++) {
-        console.log(value.shirts[i].url);
+        let oneShirtUrl = value.shirts[i].url;
+        // console.log(oneShirtUrl);
+        getAllShirtsInfo(oneShirtUrl);
     }
-    // getAllShirtsInfo(arrayOfShirtsUrl);
 }, function(raison) {
     console.log(raison);
 })};
@@ -61,6 +63,7 @@ function getAllShirtsInfo(shirtsUrl) {
     }).then(function(value) {
         // The log below gives the url, the shirt title (with price and color) and the shirt picture
         // console.log(shirtsUrl + '\n' + value.title + '\n' + value.picture);
+        console.log(value)
     })
 }
 
