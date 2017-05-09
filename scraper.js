@@ -40,15 +40,17 @@ function getProductsUrl(url) {
 }).then(function(value) {
     // let arrayOfShirtsUrl = value.shirts;
     // For now, we are working with just one value => this is an object, so thing to access the property
-    console.log(value.shirts)
-    arrayOfShirtsUrl = value.shirts[2].url;
-    getAllShirtsInfo(arrayOfShirtsUrl);
+    for (let i = 0; i < value.shirts.length; i++) {
+        console.log(value.shirts[i].url);
+    }
+    // getAllShirtsInfo(arrayOfShirtsUrl);
 }, function(raison) {
     console.log(raison);
 })};
 
 
 function getAllShirtsInfo(shirtsUrl) {
+
     scrapeIt('http://www.shirts4mike.com/'+shirtsUrl, {
         title: '.shirt-details h1',
         picture: {
@@ -58,7 +60,7 @@ function getAllShirtsInfo(shirtsUrl) {
 
     }).then(function(value) {
         // The log below gives the url, the shirt title (with price and color) and the shirt picture
-        console.log(shirtsUrl, value.title, value.picture);
+        // console.log(shirtsUrl + '\n' + value.title + '\n' + value.picture);
     })
 }
 
