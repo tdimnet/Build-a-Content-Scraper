@@ -6,6 +6,25 @@ const scrapeIt = require('scrape-it');
 var json2csv = require('json2csv');
 
 
+function retrieveAllShirtsInfo(url) {
+    scrapeIt('http://www.shirts4mike.com/'+url, {
+        title: '.shirt-details h1',
+        price: '.shirt-details .price',
+        picture: {
+            selector: '.shirt-picture img',
+            attr: 'src'
+        }
+
+    }).then(function(value) {
+        // The log below gives the url, the shirt title (with price and color) and the shirt picture
+        // console.log(shirtsUrl + '\n' + value.title + '\n' + value.picture);
+
+    })
+}
+
+
+
+
 (function() {
     // First step: go the shirts4mike.com website
     scrapeIt("http://www.shirts4mike.com/", {
@@ -28,15 +47,16 @@ var json2csv = require('json2csv');
             }
         }).then((value) => {
             // For now, we are displaying them in an array of url
-            // console.log(value.shirts);
-            let fields = ['url'];
-            let urlPages = value.shirts;
-            let csv = json2csv({ data: urlPages, fields: fields });
+            let shirtsPagesUrl = value.shirts;
+            // console.log(shirtsPagesUrl[0].url)
+            // retrieveAllShirtsInfo(shirtsPagesUrl[0].url)
 
-            fs.writeFile('file.csv', csv, function(err) {
-              if (err) throw err;
-              console.log('file saved');
-            });
+            let table = [];
+            for (let i = 0; i < shirtsPagesUrl.length; i++) {
+                let shirtInfo = retrieveAllShirtsInfo(shirtsPagesUrl[i].url);
+                table.push(shirtInfo);
+            }
+            console.log(table)
 
         })
     });
