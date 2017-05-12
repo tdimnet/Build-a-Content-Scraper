@@ -7,7 +7,9 @@ const fs = require('fs');
 // The http call module
 const request = require('request');
 // The jQuery helper
-const cheerio = require('cheerio')
+const cheerio = require('cheerio');
+// The CSV module
+var json2csv = require('json2csv');
 
 // The urls needed
 const websiteUrl = 'http://www.shirts4mike.com/';
@@ -105,6 +107,19 @@ function getShirtsInfo(shirtsUrls) {
 } // End: getShirtsInfo
 
 
+// Once everything is done, write all the data inside the csv file
 function displayData(shirtsData) {
-    console.log('The scraper is compiling for the csv file \n' ,shirtsData);
+    console.log('The scraper is compiling for the csv file');
+
+    // The fields of the csv file
+    const fields = ['date', 'url', 'price', 'picture', 'title'];
+
+    // Construct the csv
+    var csv = json2csv({ data: shirtsData, fields: fields });
+
+    // Then, write it
+    fs.writeFile('./data/file.csv', csv, function(err) {
+      if (err) throw err;
+      console.log('file saved!!!');
+    });
 }
