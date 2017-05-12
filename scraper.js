@@ -89,11 +89,11 @@ function getShirtsInfo(shirtsUrls) {
 
                 // Format the data into an object
                 let data = {
-                    date: new Date().toLocaleString(),
-                    url: shirtUrl,
+                    title: $('.shirt-details h1').text().substr(4),
                     price: $('.price').text(),
                     picture: $('.shirt-picture img').attr('src'),
-                    title: $('.shirt-details h1').text().substr(4)
+                    url: shirtUrl,
+                    date: new Date().toLocaleString(),
                 }
 
                 // Return the fetched data
@@ -112,14 +112,15 @@ function displayData(shirtsData) {
     console.log('The scraper is compiling for the csv file');
 
     // The fields of the csv file
-    const fields = ['date', 'url', 'price', 'picture', 'title'];
-
+    const fields = ['title', 'price', 'imageUrl', 'url', 'time'];
     // Construct the csv
-    var csv = json2csv({ data: shirtsData, fields: fields });
+    const csv = json2csv({ data: shirtsData, fields: fields });
+
+    const nameOfTheFile = new Date().toLocaleDateString();
 
     // Then, write it
-    fs.writeFile('./data/file.csv', csv, function(err) {
+    fs.writeFile('./data/' + nameOfTheFile + '.csv', csv, function(err) {
       if (err) throw err;
-      console.log('file saved!!!');
+      console.log('The data has been saved into the file.csv :)');
     });
 }
