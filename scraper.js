@@ -18,14 +18,15 @@ const shirtsPath = 'shirts.php';
 // ********************************
 // The Promise Interface
 // ********************************
-const scrapeTheWebsite = new Promise((resolve, reject) => {
+var scrapeTheWebsite = new Promise((resolve, reject) => {
     resolve(console.log('scraper is starting fetching data'));
 })
 
 // Run the scraper
 scrapeTheWebsite
     .then(createDataFile)
-    .then(accessTheWebsite);
+    .then(accessTheWebsite)
+    .then(getShirtsInfo)
 
 
 
@@ -50,9 +51,20 @@ function createDataFile() {
 // The scraper scripts
 // ********************************
 function accessTheWebsite() {
-    request(websiteUrl+shirtsPath, (err, res, body) => {
-        $ = cheerio.load(body);
-        var title = $('.branding-title a').text();
-        console.log(title)
-    })
+    return new Promise((resolve, reject) => {
+        request(websiteUrl+shirtsPath, (error, response, body) => {
+            $ = cheerio.load(body);
+            var arrayOfShirtsPages = [];
+            $( ".products li" ).each(function() {
+                let fullUrl = websiteUrl + shirtsPath + '?' + $(this).find('a').attr('href');
+                arrayOfShirtsPages.push(fullUrl);
+            });
+            resolve(arrayOfShirtsPages)
+        });
+    }) // End: Promise
+} // End: accessTheWebsite
+
+
+function getShirtsInfo(shirtsUrl) {
+    console.log('Info is comming from getShirtsInfo \n', shirtsUrl);
 }
