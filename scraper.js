@@ -93,7 +93,7 @@ function getShirtsInfo(shirtsUrls) {
                     price: $('.price').text(),
                     picture: $('.shirt-picture img').attr('src'),
                     url: shirtUrl,
-                    date: new Date().toLocaleString(),
+                    time: new Date().toLocaleString(),
                 }
 
                 // Return the fetched data
