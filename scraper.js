@@ -59,18 +59,26 @@ function accessTheWebsite() {
     console.log('The scraper is fetching the pages')
     return new Promise((resolve, reject) => {
         request(websiteUrl+shirtsPath, (error, response, body) => {
-            // Append the cheerio utility
-            $ = cheerio.load(body);
 
-            // Fill in the table with all shirt urls
-            var arrayOfShirtsPages = [];
-            $( ".products li" ).each(function() {
-                let fullUrl = websiteUrl + $(this).find('a').attr('href');
-                arrayOfShirtsPages.push(fullUrl);
-            });
+            // If any problems have been found, process the script
+            if (!error && response.statusCode === 200) {
+                // Append the cheerio utility
+                $ = cheerio.load(body);
 
-            // Once you're done, return the promise object
-            resolve(arrayOfShirtsPages)
+                // Fill in the table with all shirt urls
+                var arrayOfShirtsPages = [];
+                $( ".products li" ).each(function() {
+                    let fullUrl = websiteUrl + $(this).find('a').attr('href');
+                    arrayOfShirtsPages.push(fullUrl);
+                });
+
+                // Once you're done, return the promise object
+                resolve(arrayOfShirtsPages)
+
+            // End, show the error
+            } else {
+                console.log('Something went wrong', error)
+            }
         }); // End: request
     }) // End: Promise
 } // End: accessTheWebsite
@@ -83,8 +91,6 @@ function getShirtsInfo(shirtsUrls) {
     var data = shirtsUrls.map(function(shirtUrl) {
         return new Promise((resolve, reject) => {
             request(shirtUrl, (error, response, body) => {
-
-                console.log(response.statusCode)
 
                 // Load the cheerio module
                 $ = cheerio.load(body);
