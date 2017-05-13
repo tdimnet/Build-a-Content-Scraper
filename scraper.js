@@ -51,6 +51,14 @@ function createDataFile() {
 
 
 // ********************************
+// The data folder
+// ********************************
+function logErrorMessage(error) {
+    console.log('Sorry but an error occurs', error);
+}
+
+
+// ********************************
 // The scraper scripts
 // ********************************
 
@@ -77,7 +85,7 @@ function accessTheWebsite() {
 
             // End, show the error
             } else {
-                console.log('Something went wrong', error)
+                logErrorMessage();
             }
         }); // End: request
     }) // End: Promise
