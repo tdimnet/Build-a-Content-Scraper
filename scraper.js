@@ -84,6 +84,8 @@ function getShirtsInfo(shirtsUrls) {
         return new Promise((resolve, reject) => {
             request(shirtUrl, (error, response, body) => {
 
+                console.log(response.statusCode)
+
                 // Load the cheerio module
                 $ = cheerio.load(body);
 
