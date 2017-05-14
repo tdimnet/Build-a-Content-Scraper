@@ -51,11 +51,15 @@ function createDataFile() {
 
 
 // ********************************
-// The data folder
+// The error log
 // ********************************
+
+// Write the error inside the log file when something went wrong
 function logErrorMessage(error) {
-    console.log('Sorry but an error occurs', error);
+    // According to the error, show the message
+    console.log('Sorry but an error occurs', error.message);
 }
+
 
 
 // ********************************
@@ -85,7 +89,7 @@ function accessTheWebsite() {
 
             // End, show the error
             } else {
-                logErrorMessage();
+                logErrorMessage(error);
             }
         }); // End: request
     }) // End: Promise
