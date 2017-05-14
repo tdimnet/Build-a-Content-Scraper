@@ -4,6 +4,7 @@
   "description": "Here is the sixth project of the treehouse techdegree in full stack javascript: a web scraper.",
   "main": "scraper.js",
   "scripts": {
+    "start": "node scraper.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
