@@ -59,18 +59,20 @@ function logErrorMessage(error) {
     // According to the error, show the message
     if (error && (error.code = 'ENOTFOUND')) {
         // In our case, we cannot use let or const
-        var errorMessage = 'There\’s been a 404 error. Cannot connect to the to http://shirts4mike.com.';
+        var errorMessage = 'There\’s been a 404 error. Cannot connect to the to http://shirts4mike.com. \n';
     }
 
     // Then, write the error into the log file
     fs.readFile('scraper-error.log', (err, data) => {
         // An error can occur if the file is not present. If this case, create it.
         if (err && (err.code = 'ENOENT')) {
-            errorMessage += 'foooo';
             fs.writeFile('scraper-error.log', errorMessage);
         } else {
         // if the file already exists, just write the data
-
+        fs.appendFile('scraper-error.log', errorMessage, (err) => {
+          if (err) throw err;
+          console.log('The "data to append" was appended to file!');
+        });
 
         }
     }) // End: readeFile
