@@ -12,7 +12,7 @@ const cheerio = require('cheerio');
 var json2csv = require('json2csv');
 
 // The urls needed
-const websiteUrl = 'http://www.shirts4mike.co/';
+const websiteUrl = 'http://www.shirts4mike.com/';
 const shirtsPath = 'shirts.php';
 
 
@@ -56,10 +56,13 @@ function createDataFile() {
 
 // Write the error inside the log file when something went wrong
 function logErrorMessage(error) {
+    console.log('There\’s been a 404 error. Cannot connect to the to http://shirts4mike.com.');
     // According to the error, show the message
     if (error && (error.code = 'ENOTFOUND')) {
         // In our case, we cannot use let or const
-        var errorMessage = 'There\’s been a 404 error. Cannot connect to the to http://shirts4mike.com. \n';
+        var errorMessage = '[' + new Date() + '] - ';
+        errorMessage += 'There\’s been a 404 error. Cannot connect to the to http://shirts4mike.com. \n';
+        errorMessage += error + '\n';
     }
 
     // Then, write the error into the log file
@@ -71,7 +74,7 @@ function logErrorMessage(error) {
         // if the file already exists, just write the data
         fs.appendFile('scraper-error.log', errorMessage, (err) => {
           if (err) throw err;
-          console.log('The "data to append" was appended to file!');
+          console.log('The error log file has been updated.');
         });
 
         }
