@@ -9,7 +9,7 @@ const request = require('request');
 // The jQuery helper
 const cheerio = require('cheerio');
 // The CSV module
-var json2csv = require('json2csv');
+const json2csv = require('json2csv');
 
 // The urls needed
 const websiteUrl = 'http://www.shirts4mike.com/';
@@ -153,7 +153,7 @@ function displayData(shirtsData) {
     console.log('The scraper is compiling for the csv file');
 
     // The fields of the csv file
-    const fields = ['title', 'price', 'imageUrl', 'url', 'time'];
+    const fields = ['title', 'price', 'picture', 'url', 'time'];
     // Construct the csv
     const csv = json2csv({ data: shirtsData, fields: fields });
 
